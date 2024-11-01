@@ -1,14 +1,12 @@
 clear all
 close all
 
-% Load the ROS bag (remember to update the file path as necessary)
 bag = rosbag('C:\Users\lachr\OneDrive - UTS (1)\UTS 2024 Sem2 Spring\41014 Sensors and Control for Mechatronics Systems\Project\color_image.bag');
 
-% Read the first depth image message
+
 depthImg = select(bag, 'Topic', '/camera/depth/image_rect_raw');
 first_depth_img = readMessages(depthImg, 1);
 
-% Read the first RGB image message
 img = select(bag, 'Topic', '/camera/color/image_raw/compressed');
 first_rgb_img = readMessages(img, 5);
 
