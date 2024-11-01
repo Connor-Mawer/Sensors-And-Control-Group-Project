@@ -61,21 +61,21 @@ depth = d_img(y, x); %ISSUE HERE --- NAN or 0 error
 
 %https://github.com/IntelRealSense/realsense-ros/issues/709
 % RealSense D435i camera intrinsic parameters
-fx = 611.82763671875; % Focal length in pixels
-fy = 611.438232421875; % Focal length in pixels
-cx = 323.9910583496094; % Principal point x-coordinate
-cy =  232.9442901611328; % Principal point y-coordinate
+fx = 611.82763671875; 
+fy = 611.438232421875; % 
+cx = 323.9910583496094; 
+cy =  232.9442901611328;
 
 % Calculate 3D coordinates in the camera frame - from quiz 1
 X = (x - cx) * depth / fx;
 Y = (y - cy) * depth / fy;
-Z = depth; % Z-coordinate corresponds to depth
+Z = depth; 
 
 % Display the 2D and 3D coordinates
 disp(['Center of top face (2D): (', num2str(x), ', ', num2str(y), ')']);
 disp(['3D coordinates of top face in the camera frame: (', num2str(X), ', ', num2str(Y), ', ', num2str(Z), ')']);
 
-% Draw a marker on the RGB image at the detected top face center
+% Draw a marker
 img_with_marker = insertMarker(img, [x, y], 'x', 'Color', 'red', 'Size', 10);
 
 % Normalize depth image to displayable range (0 to 255) for visualization
@@ -84,13 +84,12 @@ depth_display = uint8((d_img / max(d_img(:))) * 255);
 % Draw the same marker on the depth image at the detected point
 depth_with_marker = insertMarker(depth_display, [x, y], 'x', 'Color', 'red', 'Size', 10);
 
-% Display the RGB image with the marker
 figure;
 subplot(1, 2, 1);
 imshow(img_with_marker);
 title('RGB Image with Center of Top Face Marked');
 
-% Display the Depth image with the marker
+
 subplot(1, 2, 2);
 imshow(depth_with_marker);
 title('Depth Image with Center of Top Face Marked');
